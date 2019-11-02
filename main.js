@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, webContents} = require('electron');
 
 function createWindow(){
   let win = new BrowserWindow({
@@ -10,5 +10,10 @@ function createWindow(){
   });
   win.loadFile("./app/index.html");
 }
+
+exports.Print = () => {
+  webContents.Print();
+}
+
 console.log("loaded main.js");
 app.on('ready', createWindow);
