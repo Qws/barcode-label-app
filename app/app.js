@@ -30,7 +30,6 @@ document.getElementById("btn-print-barcode").onclick = () => {
     let option = {
         "color":false,
     };
-    console.log(Object.keys(print));
     print(option);
 }
 document.getElementById("btn-create-pdf").onclick = () => {createLabel();}
