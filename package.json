@@ -2,14 +2,18 @@
   "name": "label-printer",
   "version": "1.0.0",
   "description": "Converts HTML to PDF for labels",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "author": "deno suresan",
   "license": "ISC",
   "dependencies": {
     "barcode": "^0.1.0",
     "html-pdf": "^2.2.0"
+  },
+  "devDependencies": {
+    "electron": "^7.0.1"
   }
 }
