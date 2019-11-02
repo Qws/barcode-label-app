@@ -2,12 +2,16 @@
     <head>
         <title>Barcode maker</title>
         <script type="module" src="app.js"></script>
+        <link href="./app.css" rel="stylesheet"></link>
     </head>
     <body>
-        <h2>Opties</h2>
-        <label>Type:</label><input />
-        <label>Prijs:</label><input />
-        <label>Barcode:</label><input />
-        <button id="btn-create-pdf">Maak barcode PDF</button>
+        <div id="app-content">
+            <h2>Opties</h2>
+            <section><label>Type:</label><label>EAN-13</label></section>
+            <section><label>Prijs:</label><input placeholder="optioneel" class="controls"/></section>
+            <section><label>Barcode:</label><input/></section>
+            <button id="btn-create-pdf">Maak barcode PDF</button>
+            <button id="btn-print-barcode">Print barcode</button>
+        </div>
     </body>
 </html>
