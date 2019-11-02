@@ -1,4 +1,5 @@
-const {app, BrowserWindow, webContents} = require('electron');
+const {app, BrowserWindow} = require('electron');
+let contents; //webContents
 
 function createWindow(){
   let win = new BrowserWindow({
@@ -9,10 +10,15 @@ function createWindow(){
     }
   });
   win.loadFile("./app/index.html");
+  contents = win.webContents;
 }
-
-exports.Print = () => {
-  webContents.Print();
+exports.print = (option = {}, callback = null) => {
+  if(callback === null){
+    contents.print(option);
+  }
+  else{
+    contents.print(option, callback);
+  }
 }
 
 console.log("loaded main.js");

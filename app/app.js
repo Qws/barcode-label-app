@@ -26,10 +26,11 @@ function createLabel(){
   }
 
 document.getElementById("btn-print-barcode").onclick = () => {
-    let Print = electron.remote.require('./main').Print;
+    let print = electron.remote.require('./main').print;
     let option = {
         "color":false,
     };
-    Print(option);
+    console.log(Object.keys(print));
+    print(option);
 }
 document.getElementById("btn-create-pdf").onclick = () => {createLabel();}
