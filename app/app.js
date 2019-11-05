@@ -2,6 +2,7 @@ const electron = require('electron');
 const fs = require('fs');
 const pdf = require('html-pdf');
 const templateManager = require("./template-manager");
+const JsBarcode = require('jsbarcode');
 
 const templatesFolder = "./templates/";
 const fileName = "label-template.html";
@@ -33,3 +34,4 @@ document.getElementById("btn-print-barcode").onclick = () => {
     print(option);
 }
 document.getElementById("btn-create-pdf").onclick = () => {createLabel();}
+JsBarcode("#canvas", "123456789102");
