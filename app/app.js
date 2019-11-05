@@ -14,17 +14,28 @@ let config = {
 function createLabel(){
     let html = templateManager.createHtmlLabel();
     let path = templatesFolder + fileName;
-    //create template html file and then build a pdf version from it.
-    fs.writeFile(path, html, (error)=>{
-      if (!error) {
-        var html = fs.readFileSync(path, 'utf8');
-        pdf.create(html, config).toFile('./bin/label.pdf', function(err, res) {
-          if (err) return console.log(err);
-          console.log(res); // { filename: '/bin/label.pdf' }
+    fs.exists(templatesFolder, (exist)=>{
+        if (exist === false){
+            fs.mkdirSync(templatesFolder);
+        }
+        fs.writeFile(path, html, (error)=>{
+            if (!error) {
+                createPDF(path);//Read template html file and then build a pdf version from it.
+            }
+            else{
+                console.log(error);
+            }
         });
-      }
     });
   }
+
+let createPDF = (path)=>{
+    var html = fs.readFileSync(path, 'utf8');
+    pdf.create(html, config).toFile('./bin/label.pdf', function(err, res) {
+        if (err) return console.log(err);
+        console.log(res); // { filename: '/bin/label.pdf' }
+    });
+}
 
 document.getElementById("btn-print-barcode").onclick = () => {
     let print = electron.remote.require('./main').print;
