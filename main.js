@@ -3,7 +3,7 @@ let contents; //webContents
 
 function createWindow(){
   let win = new BrowserWindow({
-    "width":400,
+    "width":800,
     "height":400,
     webPreferences:{
       nodeIntegration: true
