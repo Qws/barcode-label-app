@@ -34,4 +34,20 @@ document.getElementById("btn-print-barcode").onclick = () => {
     print(option);
 }
 document.getElementById("btn-create-pdf").onclick = () => {createLabel();}
-JsBarcode("#canvas", "123456789102");
+document.getElementById("btn-barcode-generator").onclick = () => {
+  let barcodeArray = [];
+  let c = 0;
+  while (c < 13)
+  {
+    barcodeArray[c] = Math.floor((Math.random() * 9) + 0);
+    c++;
+  }
+  c = 0;
+  let result = "";
+  while (c < 13)
+  {
+    result = result + barcodeArray[c].toString();
+    c++;
+  }
+  JsBarcode("#canvas", result);
+}
