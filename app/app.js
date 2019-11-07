@@ -9,8 +9,8 @@ const templatesPath = appPath + "\\templates\\";
 const binPath = appPath + "\\bin\\";
 const fileName = "label-template.html";
 let config = {
-    "height":"30cm",
-    "width":"50cm",
+    "height":"3cm",
+    "width":"5cm",
     "type":"pdf"
 }
 let barcode //the human readable barcode.
