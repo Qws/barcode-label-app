@@ -3,6 +3,7 @@ const fs = require('fs');
 const pdf = require('html-pdf');
 const templateManager = require("./template-manager");
 const JsBarcode = require('jsbarcode');
+const printer = require('./printer');
 
 const appPath = electron.remote.app.getAppPath();
 const templatesPath = appPath + "\\templates\\";
@@ -51,11 +52,7 @@ let createPDF = (path)=>{
 }
 
 document.getElementById("btn-print-barcode").onclick = () => {
-    let print = electron.remote.require('./main').print;
-    let option = {
-        "color":false,
-    };
-    print(option);
+    printer.print(binPath + "label.pdf");
 }
 document.getElementById("btn-create-pdf").onclick = () => {createLabel();}
 document.getElementById("btn-barcode-generator").onclick = () => {
