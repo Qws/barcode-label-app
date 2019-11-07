@@ -16,6 +16,15 @@ let config = {
 }
 let barcode //the human readable barcode.
 
+window.onload = ()=>{
+    let inputBarcode = document.getElementById("input-barcode");
+    inputBarcode.oninput = ()=>{
+        let barcode = inputBarcode.value;
+        JsBarcode("#canvas", barcode, {"width":1.3, "height":35});
+        saveCanvasToSystem();
+    }
+}
+
 function createLabel(){
     let barcodeOption = {"value": barcode}
     let html = templateManager.createBarCodeHTML(barcodeOption, "file:\\\\\\" + templatesPath + "image.png");
