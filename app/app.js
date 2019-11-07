@@ -4,22 +4,30 @@ const pdf = require('html-pdf');
 const templateManager = require("./template-manager");
 const JsBarcode = require('jsbarcode');
 
-const templatesFolder = "./templates/";
+const appPath = electron.remote.app.getAppPath();
+const templatesPath = appPath + "\\templates\\";
+const binPath = appPath + "\\bin\\";
 const fileName = "label-template.html";
 let config = {
-    "height":"3cm",
-    "width":"5cm"
+    "height":"30cm",
+    "width":"50cm",
+    "type":"pdf"
 }
+let barcode //the human readable barcode.
 
 function createLabel(){
-    let html = templateManager.createHtmlLabel();
-    let path = templatesFolder + fileName;
-    fs.exists(templatesFolder, (exist)=>{
+    let barcodeOption = {"value": barcode}
+    let html = templateManager.createBarCodeHTML(barcodeOption, "file:\\\\\\" + templatesPath + "image.png");
+    
+    
+    console.log("Label path: "+templatesPath);
+    fs.exists(templatesPath, (exist)=>{
         if (exist === false){
-            fs.mkdirSync(templatesFolder);
+            fs.mkdirSync(templatesPath);
         }
-        fs.writeFile(path, html, (error)=>{
+        fs.writeFile(templatesPath + fileName, html, (error)=>{
             if (!error) {
+                let path = templatesPath + fileName;
                 createPDF(path);//Read template html file and then build a pdf version from it.
             }
             else{
@@ -30,8 +38,13 @@ function createLabel(){
   }
 
 let createPDF = (path)=>{
+    console.log(config);
+    console.log("creating PDF on path: " + path);
     var html = fs.readFileSync(path, 'utf8');
-    pdf.create(html, config).toFile('./bin/label.pdf', function(err, res) {
+    if(config.type === undefined){
+        config.type = ".pdf";
+    }
+    pdf.create(html, config).toFile(binPath +'label.'+config.type, function(err, res) {
         if (err) return console.log(err);
         console.log(res); // { filename: '/bin/label.pdf' }
     });
@@ -54,11 +67,22 @@ document.getElementById("btn-barcode-generator").onclick = () => {
     c++;
   }
   c = 0;
-  let result = "";
+  barcode = "";
   while (c < 13)
   {
-    result = result + barcodeArray[c].toString();
+    barcode = barcode + barcodeArray[c].toString();
     c++;
   }
-  JsBarcode("#canvas", result);
+  JsBarcode("#canvas", barcode, {"width":2, "height":25, "fontSize":25});
+  saveCanvasToSystem();
+}
+
+let saveCanvasToSystem = ()=>{
+    let canvas = document.getElementById("canvas");
+    var image = canvas.toDataURL("image/png");
+    console.log(image);
+    const correctImg = image.replace("data:image/png;base64,", "");
+    console.log(correctImg);
+    let buff = Buffer.from(correctImg, "base64"); //converts base64 to binary buffer
+    fs.writeFileSync("./templates/image.png", buff);
 }
