@@ -71,6 +71,7 @@ document.getElementById("btn-barcode-generator").onclick = () => {
     c++;
   }
   JsBarcode("#canvas", barcode, {"width":1.3, "height":35});
+  document.getElementById("input-barcode").value = barcode;
   saveCanvasToSystem();
 }
 
