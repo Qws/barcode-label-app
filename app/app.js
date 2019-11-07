@@ -73,7 +73,7 @@ document.getElementById("btn-barcode-generator").onclick = () => {
     barcode = barcode + barcodeArray[c].toString();
     c++;
   }
-  JsBarcode("#canvas", barcode, {"width":2, "height":25, "fontSize":25});
+  JsBarcode("#canvas", barcode, {"width":1.3, "height":35});
   saveCanvasToSystem();
 }
 
