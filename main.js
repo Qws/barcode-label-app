@@ -8,9 +8,9 @@ function createWindow(){
 		webPreferences:{
 			nodeIntegration: true
 		}
-		});
-		win.loadFile("./app/index.html");
-		contents = win.webContents;
+	});
+	win.loadFile("./app/index.html");
+	contents = win.webContents;
 	}
 	exports.print = (option = {}, callback = null) => {
 	if(callback === null){
