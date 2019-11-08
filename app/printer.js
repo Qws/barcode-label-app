@@ -14,11 +14,16 @@ let print = (filepath) =>{
             break;
         case 'win32':
             let cmd = "";
+            let extraCmds = "-print-settings \"fit,portrait\" "; //for settings and stuff.
+            //sumatrapdf.exe -print-to "TEC B-EV4 (203dpi)" -print-settings "fit,portrait" "c:\tmp\test.pdf"
+            let printerTypes = {};
+            printerTypes[0] = " -print-to \"Microsoft Print to PDF\" ";
+            let selectInt = 0;
             if(filepath === "" || filepath === undefined){
-                cmd = sumatraPDFExePath + " -print-dialog ../../../bin/label.pdf";
+                cmd = sumatraPDFExePath + printerTypes[selectInt] +extraCmds+ " ../../../bin/label.pdf ";
             } 
             else {
-                cmd = sumatraPDFExePath + " -print-dialog " + filepath;
+                cmd = sumatraPDFExePath + printerTypes[selectInt] + extraCmds + filepath;
             }
             childProcess.exec(
                 cmd, {
