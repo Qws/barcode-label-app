@@ -19,9 +19,14 @@ let barcode //the human readable barcode.
 window.onload = ()=>{
 	let inputBarcode = document.getElementById("input-barcode");
 	inputBarcode.oninput = ()=>{
-		let barcode = inputBarcode.value;
-		JsBarcode("#canvas", barcode, {"width":1.3, "height":35});
-		saveCanvasToSystem();
+		if(inputBarcode.value.length < 13){
+			let barcode = inputBarcode.value;
+			JsBarcode("#canvas", barcode, {"width":1.3, "height":35});
+			saveCanvasToSystem();
+		}
+		else{
+			inputBarcode.value = inputBarcode.value.substr(0, 13); //removes any character after 13
+		}
 	}
 }
 
