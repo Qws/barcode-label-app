@@ -9,6 +9,7 @@ const appPath = electron.remote.app.getAppPath();
 const templatesPath = appPath + "\\templates\\";
 const binPath = appPath + "\\bin\\";
 const fileName = "label-template.html";
+const statusMessage = {ready:"Ready", working:"Working..."};
 let config = {
 	"height":"3cm",
 	"width":"5cm",
@@ -53,6 +54,7 @@ function createLabel(){
 }
 
 let createPDF = (path)=>{
+    document.getElementById("label-status").innerHTML = statusMessage.working;
 	console.log(config);
 	console.log("creating PDF on path: " + path);
 	var html = fs.readFileSync(path, 'utf8');
@@ -62,13 +64,11 @@ let createPDF = (path)=>{
 	pdf.create(html, config).toFile(binPath +'label.'+config.type, function(err, res) {
 		if (err) return console.log(err);
 		console.log(res); // { filename: '/bin/label.pdf' }
-		openPDF();
+        openPDF();
+        document.getElementById("label-status").innerHTML = statusMessage.ready;
 	});
 }
 
-document.getElementById("btn-print-barcode").onclick = () => {
-	printer.print(binPath + "label.pdf");
-}
 document.getElementById("btn-create-pdf").onclick = () => {createLabel();}
 document.getElementById("btn-barcode-generator").onclick = () => {
 	let barcodeArray = [];
