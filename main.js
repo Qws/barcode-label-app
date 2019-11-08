@@ -1,4 +1,5 @@
 const {app, BrowserWindow} = require('electron');
+const Menu = require("electron").Menu; //Why can't add in {} of require('electron');
 let contents; //webContents
 
 function createWindow(){
@@ -9,6 +10,7 @@ function createWindow(){
 			nodeIntegration: true
 		}
 	});
+	Menu.setApplicationMenu(null);
 	win.loadFile("./app/index.html");
 	contents = win.webContents;
 	}
