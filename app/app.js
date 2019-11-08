@@ -57,6 +57,7 @@ let createPDF = (path)=>{
     pdf.create(html, config).toFile(binPath +'label.'+config.type, function(err, res) {
         if (err) return console.log(err);
         console.log(res); // { filename: '/bin/label.pdf' }
+        openPDF();
     });
 }
 
@@ -92,4 +93,11 @@ let saveCanvasToSystem = ()=>{
     console.log(correctImg);
     let buff = Buffer.from(correctImg, "base64"); //converts base64 to binary buffer
     fs.writeFileSync("./templates/image.png", buff);
+}
+
+let openPDF = () =>{
+    let path = binPath + "\label.pdf";
+    path = path.replace(/\//g,"\\");
+    let shell = electron.remote.shell;
+    shell.openItem(path);
 }
