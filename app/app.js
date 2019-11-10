@@ -38,6 +38,7 @@ function createLabel(){
 
 
 	console.log("Label path: "+templatesPath);
+    document.getElementById("label-status").innerHTML = statusMessage.working;
 	fs.exists(templatesPath, (exist)=>{
 		if (exist === false){
 			fs.mkdirSync(templatesPath);
@@ -55,7 +56,6 @@ function createLabel(){
 }
 
 let createPDF = (path)=>{
-    document.getElementById("label-status").innerHTML = statusMessage.working;
 	console.log(config);
 	console.log("creating PDF on path: " + path);
 	var html = fs.readFileSync(path, 'utf8');
