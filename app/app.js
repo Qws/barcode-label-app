@@ -16,6 +16,7 @@ let config = {
 	"type":"pdf"
 }
 let barcode //the human readable barcode.
+let barcodeDigitLimit = 11;
 
 window.onload = ()=>{
 	let inputBarcode = document.getElementById("input-barcode");
@@ -73,17 +74,17 @@ document.getElementById("btn-create-pdf").onclick = () => {createLabel();}
 document.getElementById("btn-barcode-generator").onclick = () => {
 	let barcodeArray = [];
 	let c = 0;
-	while (c < 13){
+	while (c <= barcodeDigitLimit){
 		barcodeArray[c] = Math.floor((Math.random() * 9) + 0);
 		c++;
 	}
 	c = 0;
 	barcode = "";
-	while (c < 13){
+	while (c <= barcodeDigitLimit){
 		barcode = barcode + barcodeArray[c].toString();
 		c++;
 	}
-	JsBarcode("#canvas", barcode, {"width":1.3, "height":35});
+	generateBarcode(barcode);
 	document.getElementById("input-barcode").value = barcode;
 	saveCanvasToSystem();
 }
@@ -103,4 +104,12 @@ let openPDF = () =>{
 	path = path.replace(/\//g,"\\");
 	let shell = electron.remote.shell;
 	shell.openItem(path);
+}
+
+let generateBarcode = (barcode, type="EAN13")=>{
+	let options = {"width":1.5, "height":70, "margin":0, "format":type}
+	if(type === false){
+		options.format = null;
+	}
+	JsBarcode("#canvas", barcode, options);
 }
