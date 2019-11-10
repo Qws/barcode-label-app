@@ -35,8 +35,6 @@ window.onload = ()=>{
 function createLabel(){
 	let barcodeOption = {"value": barcode}
 	let html = templateManager.createBarCodeHTML(barcodeOption, "file:\\\\\\" + templatesPath + "image.png");
-
-
 	console.log("Label path: "+templatesPath);
     document.getElementById("label-status").innerHTML = statusMessage.working;
 	fs.exists(templatesPath, (exist)=>{
