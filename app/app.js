@@ -23,7 +23,7 @@ window.onload = ()=>{
 	inputBarcode.oninput = ()=>{
 		if(inputBarcode.value.length < 13){
 			let barcode = inputBarcode.value;
-			JsBarcode("#canvas", barcode, {"width":1.3, "height":35});
+			JsBarcode("#barcode", barcode, {"width":1.3, "height":35});
 			saveCanvasToSystem();
 		}
 		else{
@@ -109,5 +109,5 @@ let generateBarcode = (barcode, type="EAN13")=>{
 	if(type === false){
 		options.format = null;
 	}
-	JsBarcode("#canvas", barcode, options);
+	JsBarcode("#barcode", barcode, options);
 }
