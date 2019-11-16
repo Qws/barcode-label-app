@@ -88,7 +88,7 @@ document.getElementById("btn-barcode-generator").onclick = () => {
 }
 
 let saveCanvasToSystem = ()=>{
-	let canvas = document.getElementById("canvas");
+	let canvas = document.getElementById("barcode");
 	var image = canvas.toDataURL("image/png");
 	console.log(image);
 	const correctImg = image.replace("data:image/png;base64,", "");
