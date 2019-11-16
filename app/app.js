@@ -102,7 +102,7 @@ let saveCanvasToSystem = ()=>{
 	const correctImg = image.replace("data:image/png;base64,", "");
 	console.log(correctImg);
 	let buff = Buffer.from(correctImg, "base64"); //converts base64 to binary buffer
-	fs.writeFileSync("./templates/image.png", buff);
+	fs.writeFileSync(templatesPath+"/image.png", buff);
 }
 
 let openPDF = () =>{
