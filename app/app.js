@@ -18,6 +18,14 @@ let config = {
 let barcode //the human readable barcode.
 let barcodeDigitLimit = 11;
 
+let pathConsolerPrint = ()=>{
+	console.log("Electron AppPath: "+appPath)
+	console.log(templatesPath);
+	console.log("BinPath " + binPath);
+	console.log("filename: " + fileName);
+}
+pathConsolerPrint();
+
 window.onload = ()=>{
 	let inputBarcode = document.getElementById("input-barcode");
 	inputBarcode.oninput = ()=>{
