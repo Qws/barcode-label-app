@@ -1,13 +1,14 @@
-#How to build/compile
+# How to build/compile
 
 For Windows:
 
-npm install electron-packager --save-dev
-npm install electron-packager -g
+`npm install electron-packager --save-dev`
+
+`npm install electron-packager -g`
 
 Use the CMD instead of Powershell. For some reason Powershell is complaining
 
-#How to start the app without build/compile
+# How to start the app
 
-Start through an npm-script: 
-npm start
+Start through a npm-script: 
+`npm start` 
